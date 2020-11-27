@@ -52,12 +52,6 @@ public class Main{
 		System.out.println("* Que desea hacer?:                      *");
 		System.out.println("* (1) Contratar un empleado              *");
 		System.out.println("* (2) Despedir un empleado               *");
-		System.out.println("* (3) Ingresar una cancion               *");
-		System.out.println("* (4) Mostrar las canciones registradas  *");
-		System.out.println("* (5) Crear una play list                *");
-		System.out.println("* (6) Agregar canciones a una play list  *");
-		System.out.println("* (7) Mostrar las play lists registradas *");
-		System.out.println("* (8) Calificar una play list publica    *");
 		System.out.println("* (0) Salir                              *");
 		System.out.println("******************************************");
 		option = lector.nextInt();lector.nextLine();
@@ -130,9 +124,15 @@ public class Main{
 		int salary = 0;
 		int i = 0;
 		int team = 0;
+		int option = 0;
 		boolean player = false;
+		boolean findEmployee = false;
 		ArrayList<String> nameChampions = new ArrayList<>();
 		ArrayList<String> expertise = new ArrayList<>();
+
+		System.out.println("***********************************************************************");
+		System.out.println("*                        CONTRATAR UN EMPLEADO                        *");
+		System.out.println("***********************************************************************");
 
 			System.out.println("****************************");
 			System.out.println("* Que tipo de empleado es? *");
@@ -152,11 +152,19 @@ public class Main{
 			}
 		}while(typeEmployee != 1 && typeEmployee != 2 && typeEmployee != 3);
 
-		System.out.println("Ingrese el nombre del empleado");
-		name = lector.nextLine();
+		do{
+			System.out.println("Ingrese el nombre del empleado");
+			name = lector.nextLine();
 
-		System.out.println("Ingrese el numero identificador del empleado");
-		id = lector.nextLine();
+			System.out.println("Ingrese el numero identificador del empleado");
+			id = lector.nextLine();
+
+			findEmployee = club.findEmployee(name,id);
+
+			if(findEmployee){
+				System.out.println("Ya se encuentra registrado un empleado con ese nombre y el identificador, registre otro");
+			}
+		}while(findEmployee);
 
 		System.out.println("Ingrese el salario del empleado");
 		salary = lector.nextInt();lector.nextLine();
@@ -170,7 +178,7 @@ public class Main{
 		System.out.println("*****************************");
 		System.out.println("* A que equipo va a entrar? *");
 		System.out.println("*****************************");
-		System.out.println("* (1) A                     *");
+		System.out.println("* (1) "+club.get+"                     *");
 		System.out.println("* (2) B                     *");
 		System.out.println("*****************************");
 
@@ -208,10 +216,23 @@ public class Main{
 			break;
 			case 2:
 
-			System.out.println("El asistente tecnico ha sido un jugador profesional (Si/No)?");
-			playerProfessional = lector.nextLine();
+			System.out.println("********************************************************");
+			System.out.println("* El asistente tecnico ha sido un jugador profesional? *");
+			System.out.println("********************************************************");
+			System.out.println("* (1) Si                                               *");
+			System.out.println("* (2) No                                               *");
+			System.out.println("********************************************************");
 
-			if(verific.equalsIgnoreCase(YES)){
+			do{
+				option = lector.nextInt();lector.nextLine();
+
+				if(option != 1 && option != 2){
+
+					System.out.println("Opcion invalida, digitela de nuevo");
+				}
+			}while(option != 1 && option != 2);
+
+			if(option == 1){
 				player = true;
 			}
 
@@ -241,7 +262,7 @@ public class Main{
 				findNumTShirt = club.findNumTShirt(numTShirt,team);
 
 				if(findNumTShirt){
-					System.out.println("Un jugador del equipo "+team+" ya posee ese mismo numero, por favor elija otro");
+					System.out.println("Un jugador del equipo ya posee ese mismo numero, por favor elija otro");
 				}
 			}while(findNumTShirt);
 
@@ -268,4 +289,23 @@ public class Main{
 			System.out.println(message);
 			break;
 		}
+	}
+
+	public void dismissingEmployee(){
+
+		String name, id, message;
+
+		System.out.println("************************************************************************");
+		System.out.println("*                         DESPEDIR UN EMPLEADO                         *");
+		System.out.println("************************************************************************");
+
+		System.out.println("Ingrese el nombre del empleado");
+		name = lector.nextLine();
+
+		System.out.println("Ingrese el identificador del empleado");
+		id = lector.nextLine();
+
+		message = dismissingEmployee(name,id);
+
+		System.out.println(message);
 	}

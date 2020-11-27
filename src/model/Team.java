@@ -68,6 +68,18 @@ public class Team{
 		return message;
 	}
 
+	public boolean findNumTShirt(String numTShirt){
+
+		boolean verific = false;
+
+		for(int i = 0;i<TWENTYFIVE && !verific; i++){
+			if(players[i] != null && players[i].getTshirtNumber().equals(numTShirt)){
+				verific = true;
+			}
+		}
+		return verific;
+	}
+
 	public String getName(){
 		return name;
 	}

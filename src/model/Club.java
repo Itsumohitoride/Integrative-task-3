@@ -23,8 +23,30 @@ public class Main{
 		this.date = date;
 	}
 
-	public boolean findEmployee(){
+	public Employee findEmployee(String name, String id){
 
+		boolean verific = false;
+		Employee objEmployee = null;
+
+		for(int i = 0; i<employee.size() && !verific; i++){
+			if(employee.get(i) != null && employee.get(i).getName().equals(name) && employee.get(i).getId().equals(id){
+				verific = true;
+				objEmployee = employee.get(i);
+			}
+		}
+		return objEmployee;
+	}
+
+	public boolean findNumTShirt(String numTShirt, int team){
+
+		boolean verific = false;
+
+		if(team == 1){
+			verific = findNumTShirt(numTShirt);
+		}else if(team == 2){
+			verific = findNumTShirt(numTShirt);
+		}
+		return verific;
 	}
 
 	public String hireEmployee(String name,String id,double salary,int team,String numTShirt,int playerPosition){
@@ -39,6 +61,15 @@ public class Main{
 		else if(team == 2){
 			message = teamB.hireEmployee(objEmployee);
 		}
+
+		return message;
+	}
+
+	public String dismissingEmployee(String name, String id){
+
+		String message = "";
+
+		Employee objEmployee = findEmployee(name,id);
 
 		return message;
 	}
