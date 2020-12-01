@@ -1,17 +1,18 @@
 package model;
+import java.util.*;
 
 public class HeadCoach extends Coach{
 
 	//Attribute
 
 	private int numTeams;
-	private int championshipsAchieved;
+	private ArrayList<String> nameChampions;
 
-	public HeadCoach(String name, String id, double salary, int yearsExperience, int numTeams, int championshipsAchieved){
+	public HeadCoach(String name, String id, double salary, int yearsExperience, int numTeams, ArrayList<String> nameChampions){
 
 		super(name,id,salary,yearsExperience);
 		this.numTeams = numTeams;
-		this.championshipsAchieved = championshipsAchieved;
+		this.nameChampions = nameChampions;
 	}
 
 	public int getNumTeams(){
@@ -22,11 +23,11 @@ public class HeadCoach extends Coach{
 		this.numTeams = numTeams;
 	}
 
-	public int getChampionshipsAchieved(){
-		return championshipsAchieved;
+	public int getNameChampions(){
+		return nameChampions;
 	}
 
-	public void setChampionshipsAchieved(int championshipsAchieved){
-		this.championshipsAchieved = championshipsAchieved;
+	public void setNameChampions(ArrayList nameChampions){
+		this.nameChampions = nameChampions;
 	}
 }

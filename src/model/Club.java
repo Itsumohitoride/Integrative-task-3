@@ -1,23 +1,25 @@
 package model;
 import java.util.*;
 
-public class Main{
+public class Club{
 
 	//Attribute 
 
 	private String name;
 	private String nit;
 	private String date;
+	private Team team1;
+	private Team team2;
 
 	//Relation
 
 	private ArrayList<Employee> employee;
 
-	public Main(String name, String nit, String date, String teamA, String teamB){
+	public Club(String name, String nit, String date, String teamA, String teamB){
 
 		employee = new ArrayList<>();
-		teamA = new Team(teamA);
-		teamB = new Team(teamB);
+		team1 = new Team(teamA);
+		team2 = new Team(teamB);
 		this.name = name;
 		this.nit = nit;
 		this.date = date;
@@ -29,7 +31,7 @@ public class Main{
 		Employee objEmployee = null;
 
 		for(int i = 0; i<employee.size() && !verific; i++){
-			if(employee.get(i) != null && employee.get(i).getName().equals(name) && employee.get(i).getId().equals(id){
+			if(employee.get(i) != null && employee.get(i).getName().equals(name) && employee.get(i).getId().equals(id)){
 				verific = true;
 				objEmployee = employee.get(i);
 			}
@@ -42,24 +44,56 @@ public class Main{
 		boolean verific = false;
 
 		if(team == 1){
-			verific = findNumTShirt(numTShirt);
+			verific = team1.findNumTShirt(numTShirt);
 		}else if(team == 2){
-			verific = findNumTShirt(numTShirt);
+			verific = team2.findNumTShirt(numTShirt);
 		}
 		return verific;
+	}
+
+	public String hireEmployee(String name,String id,double salary,int yearsExperience,int team,int teams, ArrayList<String> nameChampions){
+
+		String message = "";
+
+		HeadCoach objEmployee = new HeadCoach(name,id,salary,yearsExperience,teams,nameChampions);
+
+		if(team == 1){
+			message = team1.hireEmployee(objEmployee);
+		}
+		else if(team == 2){
+			message = team2.hireEmployee(objEmployee);
+		}
+
+		return message;
+	}
+
+	public String hireEmployee(String name,String id,double salary, int yearsExperience, int team, boolean professionalPlayer, ArrayList<String> expertise){
+
+		String message = "";
+
+		TechnicalAssistant objEmployee = new TechnicalAssistant(name,id,salary,yearsExperience,professionalPlayer);
+
+		if(team == 1){
+			message = team1.hireEmployee(objEmployee);
+		}
+		else if(team == 2){
+			message = team2.hireEmployee(objEmployee);
+		}
+
+		return message;
 	}
 
 	public String hireEmployee(String name,String id,double salary,int team,String numTShirt,int playerPosition){
 
 		String message = "";
 
-		Employee objEmployee = new Player(name,id,salary,numTShirt,playerPosition);
+		Player objEmployee = new Player(name,id,salary,numTShirt,playerPosition);
 
 		if(team == 1){
-			message = teamA.hireEmployee(objEmployee);
+			message = team1.hireEmployee(objEmployee);
 		}
 		else if(team == 2){
-			message = teamB.hireEmployee(objEmployee);
+			message = team2.hireEmployee(objEmployee);
 		}
 
 		return message;
@@ -67,12 +101,65 @@ public class Main{
 
 	public String dismissingEmployee(String name, String id){
 
+		String message = "Se despidio correctamente al empleado";
+		boolean verific = false;
+
+		Employee objEmployee = findEmployee(name,id);
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			verific = team1.dismissingEmployee((HeadCoach)objEmployee);
+
+			if(!verific){
+
+				verific = team2.dismissingEmployee((HeadCoach)objEmployee);
+
+				if(!verific){
+					message = "No se pudo despedir correctamente al empleado";
+				}
+			}
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			verific = team1.dismissingEmployee((TechnicalAssistant)objEmployee);
+
+			if(!verific){
+
+				verific = team2.dismissingEmployee((TechnicalAssistant)objEmployee);
+
+				if(!verific){
+					message = "No se pudo despedir correctamente al empleado";
+				}
+			}
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			verific = team1.dismissingEmployee((Player)objEmployee);
+
+			if(!verific){
+
+				verific = team2.dismissingEmployee((Player)objEmployee);
+
+				if(!verific){
+					message = "No se pudo despedir correctamente al empleado";
+				}
+			}
+		}
+
+		
+		return message;
+	}
+/**
+	public String changeInformationEmployee(String name, String id, int option, int option2){
+
 		String message = "";
 
 		Employee objEmployee = findEmployee(name,id);
 
+		objEmployee.changeInformationEmployee(option,option2);
+
 		return message;
 	}
+	*/
 
 	public String getName(){
 		return name;
@@ -96,5 +183,19 @@ public class Main{
 
 	public void setDate(String date){
 		this.date = date;
+	}
+
+	public String showNames(){
+
+		String message = "";
+
+		message = "*****************************\n"+
+				  "* A que equipo pertenece? \n*"+
+				  "*****************************\n"+
+				  "* (1) "+team1.getName()+"   *\n"+
+				  "* (2) "+team2.getName()+"   *\n"+
+				  "*****************************\n";
+
+		return message;
 	}
 }

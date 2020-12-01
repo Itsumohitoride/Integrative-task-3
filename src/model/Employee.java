@@ -12,9 +12,41 @@ public class Employee{
 	public Employee(String name, String id, double salary){
 
 		this.name = name;
-		this.id = id;.
+		this.id = id;
 		this.salary = salary;
 		this.state = State.ACTIVE;
+	}
+
+	public void changeState(){
+		setState(State.INACTIVE);
+	}
+
+	public String changeInformationEmployee(){
+
+		String message = "";
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach && option == 1){
+			if(option2 == 1){
+
+			}
+			else if(option2 == 2){
+
+			}
+			else if(option2 == 3){
+
+			}
+			else if(option2 == 4){
+
+			}
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant && option == 2){
+
+		}
+		else if(objEmployee != null && objEmployee instanceof Player && option == 3){
+
+		}
+
+		return message;
 	}
 
 	public String getName(){
@@ -39,5 +71,13 @@ public class Employee{
 
 	public void setSalary(double salary){
 		this.salary = salary;
+	}
+
+	public State getState(){
+		return state;
+	}
+
+	public void setState(State state){
+		this.state = state;
 	}
 }

@@ -33,6 +33,9 @@ public class Player extends Employee{
 
 	public String hireEmployee(){
 
+		String message = "";
+
+		return message;
 	}
 
 	public String getTshirtNumber(){
@@ -48,7 +51,7 @@ public class Player extends Employee{
 	}
 
 	public void setCalification(double calification){
-		this.calification = calification
+		this.calification = calification;
 	}
 
 	public int getGoals(){

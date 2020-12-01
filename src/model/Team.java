@@ -24,7 +24,7 @@ public class Team{
 		players = new Player[TWENTYFIVE];
 	}
 
-	public String hireEmployee(Employee objEmployee){
+	public String hireEmployee(Player objEmployee){
 		
 		String message = "";
 		boolean verific = false;
@@ -41,11 +41,19 @@ public class Team{
 				}
 			}
 		}
-		else if(objEmployee != null && objEmployee instanceof HeadCoach){
-			for (int k = 0;k<ONE && !verific; k++) {
-				if(headCoach[k] == null){
+		return message;
+	}
+
+	public String hireEmployee(HeadCoach objEmployee){
+
+		String message = "";
+		boolean verific = false;
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+			for (int i = 0;i<ONE && !verific; i++) {
+				if(headCoach[i] == null){
 					verific = true;
-					headCoach[k] = objEmployee;
+					headCoach[i] = objEmployee;
 					message = "Se ingreso correctamente el entrenador principal al equipo";
 				}
 				else{
@@ -53,11 +61,20 @@ public class Team{
 				}
 			}
 		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
-			for(int p = 0; p<THREE && !verific; p++){
-				if(technicalAssistant[p] == null){
+
+		return message;
+	}
+
+	public String hireEmployee(TechnicalAssistant objEmployee){
+
+		String message = "";
+		boolean verific = false;
+
+		if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+			for(int i = 0; i<THREE && !verific; i++){
+				if(technicalAssistant[i] == null){
 					verific = true;
-					technicalAssistant[k] = objEmployee;
+					technicalAssistant[i] = objEmployee;
 					message = "Se ingreso correctamente el asistente tecnico al equipo";
 				}
 				else {
@@ -75,6 +92,55 @@ public class Team{
 		for(int i = 0;i<TWENTYFIVE && !verific; i++){
 			if(players[i] != null && players[i].getTshirtNumber().equals(numTShirt)){
 				verific = true;
+			}
+		}
+		return verific;
+	}
+
+	public boolean dismissingEmployee(HeadCoach objEmployee){
+
+		boolean verific = false;
+			
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+			for (int k = 0;k<ONE && !verific; k++) {
+				if(headCoach[k] == objEmployee){
+					verific = true;
+					objEmployee.changeState();
+					headCoach[k] = null;
+				}
+			}
+		}
+		return verific;
+	}
+
+	public boolean dismissingEmployee(TechnicalAssistant objEmployee){
+
+		boolean verific = false;
+
+		if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+			for(int i = 0; i<THREE && !verific; i++){
+				if(technicalAssistant[i] == objEmployee){
+					verific = true;
+					objEmployee.changeState();
+					technicalAssistant[i] = null;
+				}
+			}
+		}
+
+		return verific;
+	}
+
+	public boolean dismissingEmployee(Player objEmployee){
+		 
+		boolean verific = false;
+
+		if(objEmployee != null && objEmployee instanceof Player){
+			for(int i = 0; i<TWENTYFIVE && !verific; i++){
+				if(players[i] == objEmployee){
+					verific = true;
+					objEmployee.changeState();
+					players[i] = null;
+				}
 			}
 		}
 		return verific;
