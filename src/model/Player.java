@@ -61,4 +61,18 @@ public class Player extends Employee{
 	public void setGoals(int goals){
 		this.goals = goals;
 	}
+
+	@Override
+
+	public String toString(){
+
+		String message = "";
+
+		message = super.toString()+
+				  "\n** Numero de camisa: "+tshirtNumber+
+				  "\n** Posicio: "+position+
+				  "\n*******************************";
+
+		return message;
+	}
 }

@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Coach{
+public abstract class Coach extends Employee{
 
 	//Attribute
 
@@ -18,5 +18,17 @@ public abstract class Coach{
 
 	public void setYearsExperience(int yearsExperience){
 		this.yearsExperience = yearsExperience;
+	}
+
+	@Override
+
+	public String toString(){
+
+		String message = "";
+
+		message = super.toString()+
+				  "\n** Anios de experiencia: "+yearsExperience;
+
+		return message;
 	}
 }

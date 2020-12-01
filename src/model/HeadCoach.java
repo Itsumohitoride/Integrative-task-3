@@ -23,11 +23,29 @@ public class HeadCoach extends Coach{
 		this.numTeams = numTeams;
 	}
 
-	public int getNameChampions(){
+	public ArrayList<String> getNameChampions(){
 		return nameChampions;
 	}
 
-	public void setNameChampions(ArrayList nameChampions){
+	public void setNameChampions(ArrayList<String> nameChampions){
 		this.nameChampions = nameChampions;
+	}
+
+	@Override 
+
+	public String toString(){
+
+		String message = "";
+		String messageChampions;
+
+		for(int i = 0; i<nameChampions.size(); i++){
+
+		}
+
+		message = super.toString()+
+				  "\n** Equipos a cargo: "+numTeams+
+				  "\n** Campeonatos conseguidos: "
+
+		return message;
 	}
 }

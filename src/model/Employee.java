@@ -1,12 +1,12 @@
 package model;
 
-public class Employee{
+public abstract class Employee{
 
 	//Attribute
 
 	private String name;
 	private String id;
-	private int salary;
+	private double salary;
 	private State state;
 
 	public Employee(String name, String id, double salary){
@@ -20,6 +20,8 @@ public class Employee{
 	public void changeState(){
 		setState(State.INACTIVE);
 	}
+
+	/**
 
 	public String changeInformationEmployee(){
 
@@ -48,6 +50,7 @@ public class Employee{
 
 		return message;
 	}
+	*/
 
 	public String getName(){
 		return name;
@@ -79,5 +82,19 @@ public class Employee{
 
 	public void setState(State state){
 		this.state = state;
+	}
+
+	public String toString(){
+
+		String message = "";
+
+		message = "*******************************\n"+
+				  "*         Informacion         *\n"+
+				  "*******************************\n"+
+				  "** Nombre: "+name+
+				  "\n** Identificador: "+id+
+				  "\n** Salario: "+salary+
+				  "\n** Estado: "+state;
+		return message;
 	}
 }

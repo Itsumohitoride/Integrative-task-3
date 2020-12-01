@@ -25,13 +25,21 @@ public class Club{
 		this.date = date;
 	}
 
-	public Employee findEmployee(String name, String id){
+	public boolean findEmployee(String name, String id){
 
 		boolean verific = false;
+
+		verific = findEmployee(name,id);
+
+		return verific;
+	}
+
+	public Employee objFindEmployee(String name, String id){
+
 		Employee objEmployee = null;
 
 		for(int i = 0; i<employee.size() && !verific; i++){
-			if(employee.get(i) != null && employee.get(i).getName().equals(name) && employee.get(i).getId().equals(id)){
+			if(employee.get(i) != null && employee.get(i).getName().equalsIgnoreCase(name) && employee.get(i).getId(i).equalsIgnoreCase(id)){
 				verific = true;
 				objEmployee = employee.get(i);
 			}
@@ -104,48 +112,17 @@ public class Club{
 		String message = "Se despidio correctamente al empleado";
 		boolean verific = false;
 
-		Employee objEmployee = findEmployee(name,id);
-		if(objEmployee != null && objEmployee instanceof HeadCoach){
 
-			verific = team1.dismissingEmployee((HeadCoach)objEmployee);
+		verific = team1.dismissingEmployee(name,id);
 
-			if(!verific){
+		if(!verific){
 
-				verific = team2.dismissingEmployee((HeadCoach)objEmployee);
-
-				if(!verific){
-					message = "No se pudo despedir correctamente al empleado";
-				}
-			}
-		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
-
-			verific = team1.dismissingEmployee((TechnicalAssistant)objEmployee);
+			verific = team2.dismissingEmployee(name,id);
 
 			if(!verific){
-
-				verific = team2.dismissingEmployee((TechnicalAssistant)objEmployee);
-
-				if(!verific){
-					message = "No se pudo despedir correctamente al empleado";
-				}
+				message = "No se pudo despedir correctamente al empleado";
 			}
 		}
-		else if(objEmployee != null && objEmployee instanceof Player){
-
-			verific = team1.dismissingEmployee((Player)objEmployee);
-
-			if(!verific){
-
-				verific = team2.dismissingEmployee((Player)objEmployee);
-
-				if(!verific){
-					message = "No se pudo despedir correctamente al empleado";
-				}
-			}
-		}
-
-		
 		return message;
 	}
 /**
@@ -192,10 +169,33 @@ public class Club{
 		message = "*****************************\n"+
 				  "* A que equipo pertenece? \n*"+
 				  "*****************************\n"+
-				  "* (1) "+team1.getName()+"   *\n"+
-				  "* (2) "+team2.getName()+"   *\n"+
+				  "* (1) "+team1.getName()+"\n"+
+				  "* (2) "+team2.getName()+"\n"+
 				  "*****************************\n";
 
 		return message;
 	}
+
+	public String showEmployee(String name, String id){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).toString();
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).toString();
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).toString();
+		}
+
+		return message;
+	}
+
 }

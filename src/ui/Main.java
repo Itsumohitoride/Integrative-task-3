@@ -53,6 +53,7 @@ public class Main{
 		System.out.println("* (1) Contratar un empleado                 *");
 		System.out.println("* (2) Despedir un empleado                  *");
 		System.out.println("* (3) Actualizar informacion de un empleado *");
+		System.out.println("* (4) Buscar un empleado                    *");
 		System.out.println("* (0) Salir                                 *");
 		System.out.println("*********************************************");
 		option = lector.nextInt();lector.nextLine();
@@ -70,10 +71,10 @@ public class Main{
 			dismissingEmployee();
 			break;
 			case 3:
-			//changeInformationEmployee();
+			changeInformationEmployee();
 			break;
 			case 4:
-			
+			showEmployee();
 			break;
 			case 5:
 			
@@ -99,6 +100,10 @@ public class Main{
 	public void createClub(){
 
 		String name, nit, date, team1, team2;
+
+		System.out.println("**********************************************************************");
+		System.out.println("*                           CLUB DEPORTIVO                           *");
+		System.out.println("**********************************************************************");
 
 		System.out.println("Ingrese el nombre del club");
 		name = lector.nextLine();
@@ -130,7 +135,7 @@ public class Main{
 		int option = 0;
 		int playerPosition = 0;
 		boolean player = false;
-		Employee findEmployee;
+		boolean findEmployee = false;
 		boolean findNumTShirt = false;
 		ArrayList<String> nameChampions = new ArrayList<>();
 		ArrayList<String> expertise = new ArrayList<>();
@@ -166,17 +171,17 @@ public class Main{
 
 			findEmployee = club.findEmployee(name,id);
 
-			if(findEmployee != null){
+			if(findEmployee){
 				System.out.println("Ya se encuentra registrado un empleado con ese nombre e identificador, registre otro");
 			}
-		}while(findEmployee != null);
+		}while(findEmployee);
 
 		System.out.println("Ingrese el salario del empleado");
 		salary = lector.nextDouble();lector.nextLine();
 
 		if(typeEmployee == 1 || typeEmployee == 2){
 
-			System.out.println("Cuantos años de experiencia tiene el entrenador?");
+			System.out.println("Cuantos anios de experiencia tiene el entrenador?");
 			yearsExperience = lector.nextInt();
 		}
 
@@ -299,14 +304,12 @@ public class Main{
 	public void dismissingEmployee(){
 
 		String name, id, message;
-		Employee findEmployee;
+		boolean findEmployee = false;
 
 		System.out.println("************************************************************************");
 		System.out.println("*                         DESPEDIR UN EMPLEADO                         *");
 		System.out.println("************************************************************************");
 
-
-		
 		do{
 			System.out.println("Ingrese el nombre del empleado");
 			name = lector.nextLine();
@@ -316,10 +319,10 @@ public class Main{
 
 			findEmployee = club.findEmployee(name,id);
 
-			if(findEmployee == null){
+			if(!findEmployee){
 				System.out.println("No se encuentra registrado ningun empleado con esas cualidades, ingrese otro");
 			}
-		}while(findEmployee == null);
+		}while(!findEmployee);
 
 		message = club.dismissingEmployee(name,id);
 
@@ -327,6 +330,7 @@ public class Main{
 	}
 
 	/**
+
 	public void changeInformationEmployee(){
 
 		String message = "";
@@ -368,18 +372,6 @@ public class Main{
 					System.out.println("Opcion invalida, digitela de nuevo");
 				}
 			}while(option != 1 && option != 2 && option != 3);
-
-		message = club.showNames();
-		System.out.println(message);
-
-		do{
-			team = lector.nextInt();lector.nextLine();
-
-			if(team != 1 && team != 2){
-
-				System.out.println("Opcion invalida, digitela de nuevo");
-			}
-		}while(team != 1 && team != 2);
 
 		switch(option){
 			case 1:
@@ -506,4 +498,31 @@ public class Main{
 		}
 	}
 	*/
+
+	public void showEmployee(){
+
+		String name, id, message;
+
+		System.out.println("************************************************************************");
+		System.out.println("*                          BUSCAR UN EMPLEADO                          *");
+		System.out.println("************************************************************************");
+
+		do{
+			System.out.println("Ingrese el nombre del empleado");
+			name = lector.nextLine();
+
+			System.out.println("Ingrese el identificador del empleado");
+			id = lector.nextLine();
+
+			findEmployee = club.findEmployee(name,id);
+
+			if(!findEmployee){
+				System.out.println("No se encuentra registrado ningun empleado con esas cualidades, ingrese otro");
+			}
+		}while(!findEmployee);
+
+		message = club.showEmployee(name,id);
+
+		System.out.println(message);
+	}
 }
