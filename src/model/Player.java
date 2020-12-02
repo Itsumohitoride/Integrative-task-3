@@ -31,9 +31,29 @@ public class Player extends Employee{
 		this.goals = 0;
 	}
 
-	public String hireEmployee(){
+	public String changeNumPlayer(String numPlayer){
 
-		String message = "";
+		String message = "Se cambio exitosamente el numero de camiseta";
+
+		setTshirtNumber(numPlayer);
+
+		return message;
+	}
+
+	public String changeGoals(int goals){
+
+		String message = "Se cambio exitosamente el numero de goles";
+
+		setGoals(goals);
+
+		return message;
+	}
+
+	public String changeCalification(double califiction){
+
+		String message = "Se cambio exitosamente la calificacion";
+
+		setCalification(calification);
 
 		return message;
 	}
@@ -79,6 +99,8 @@ public class Player extends Employee{
 		message = super.toString()+
 				  "\n** Numero de camisa: "+tshirtNumber+
 				  "\n** Posicion: "+position+
+				  "\n** Goles: "+goals+
+				  "\n** Calificacion: "+calification+
 				  "\n************************************************************************";
 
 		return message;

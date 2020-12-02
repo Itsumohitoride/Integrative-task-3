@@ -72,7 +72,7 @@ public class Main{
 			dismissingEmployee();
 			break;
 			case 3:
-			//changeInformationEmployee();
+			changeInformationEmployee();
 			break;
 			case 4:
 			showEmployee();
@@ -253,11 +253,11 @@ public class Main{
 				System.out.println("Ingrese el numero de experticies (entre 1 y 6)");
 				calification = lector.nextInt();
 
-				if(calification<0 || calification>5){
+				if(calification<0 || calification>=6){
 					System.out.println("Ingrese una opcion correcta");
 				}
 
-			}while(calification<0 || calification>5);
+			}while(calification<0 || calification>=6);
 
 			System.out.println("****************************");
 			System.out.println("* Que experticie tiene?    *");
@@ -366,14 +366,18 @@ public class Main{
 	public void changeInformationEmployee(){
 
 		String message = "";
-		String salary, numTShirt, name, id;
+		String numTShirt, name, id, champions;
 		int goals = 0;
 		int option = 0;
 		int team = 0;
+		int teams = 0;
 		int option2 = 0;
+		int yearsExperience = 0;
 		int typeExpertise = 0;
+		double salary = 0;
 		double calification = 0;
 		boolean findEmployee;
+		boolean findNumTShirt;
 
 		do{
 			System.out.println("Ingrese el nombre del empleado");
@@ -429,30 +433,30 @@ public class Main{
 			switch(option2){
 				case 1:
 				System.out.println("Ingrese el nuevo salario del Entrenador");
-				salary = lector.nextLine();
+				salary = lector.nextDouble();lector.nextLine();
 
 				message = club.changeSalary(name,id,salary);
 				System.out.println(message);
 				break;
 				case 2:
 				System.out.println("Ingrese los años de experiencia del Entrenador");
-				yearsExperience = lector.nextLine();
+				yearsExperience = lector.nextInt();lector.nextLine();
 
 				message = club.changeYearsExperience(name,id,yearsExperience);
 				System.out.println(message);
 				break;
 				case 3:
-				System.out.println("Ingrese los equipos a cargo del Entrenador");
-				teams = lector.nextInt();
+				System.out.println("Ingrese el numero de equipos a cargo del Entrenador");
+				teams = lector.nextInt();lector.nextLine();
 
-				message = club.changeInformationEmployee(name,id,salary,team,option2);
+				message = club.changeTeams(name,id,teams);
 				System.out.println(message);
 				break;
 				case 4:
-				System.out.println("Ingrese campeonatos logrados del Entrenador");
-				champions = lector.nextInt();
+				System.out.println("Ingrese el campeonato logrado que va a agregar del Entrenador");
+				champions = lector.nextLine();
 
-				message = club.changeInformationEmployee(name,id,salary,team,option2);
+				message = club.changeChampions(name,id,champions);
 				System.out.println(message);
 				break;
 			}
@@ -479,14 +483,14 @@ public class Main{
 			switch(option2){
 				case 1:
 				System.out.println("Ingrese el nuevo salario del jugador");
-				salary = lector.nextLine();
+				salary = lector.nextDouble();lector.nextLine();
 
 				message = club.changeSalary(name,id,salary);
 				System.out.println(message);
 				break;
 				case 2:
 				System.out.println("Ingrese los años de experiencia del Entrenador");
-				yearsExperience = lector.nextLine();
+				yearsExperience = lector.nextInt();lector.nextLine();
 
 				message = club.changeYearsExperience(name,id,yearsExperience);
 				System.out.println(message);
@@ -516,100 +520,103 @@ public class Main{
 
 				System.out.println(message);
 				break;
-				case 3:
-				System.out.println("***************************");
-				System.out.println("* Que desea cambiar?      *");
-				System.out.println("***************************");
-				System.out.println("* (1) Salario             *");
-				System.out.println("* (2) Numero de la camisa *");
-				System.out.println("* (3) Goles               *");
-				System.out.println("* (4) Calificacion        *");
-				System.out.println("***************************");
-
-				do{
-					option2 = lector.nextInt();lector.nextLine();
-
-					if(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4){
-
-						System.out.println("Opcion invalida, digitela de nuevo");
-					}
-				}while(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4);
-
-				switch(option2){
-					case 1:
-					System.out.println("Ingrese el nuevo salario del jugador");
-					salary = lector.nextLine();
-
-					message = club.changeSalary(name,id,salary);
-					System.out.println(message);
-					break;
-					case 2:
-					do{
-						System.out.println("Ingrese el nuevo numero de camiseta del jugador?");
-						numTShirt = lector.nextLine();
-
-						findNumTShirt = club.findNumTShirt(numTShirt,team);
-
-						if(findNumTShirt){
-							System.out.println("Un jugador del equipo ya posee ese mismo numero, por favor elija otro");
-						}
-					}while(findNumTShirt);
-
-					message = club.changeNumPlayer(name,id,numTShirt);
-					System.out.println(message);
-					break;
-					case 3:
-					System.out.println("Ingrese los goles del jugador");
-					goals = lector.nextInt();lector.nextLine();
-
-					message = club.changeGoals(name,id,goals);
-					System.out.println(message);
-					break;
-					case 4:
-					do{
-
-						System.out.println("Ingrese la calificacion (entre 1 y 10)");
-						calification = lector.nextDouble();
-
-						if(calification<=1 || calification>=10){
-							System.out.println("Ingrese una opcion correcta");
-						}
-
-					}while(calification<=1 || calification>=10);
-
-					message = club.changeCalification(name,id,calification);
-					System.out.println(message);
-					break;
-				}
-				break;
 			}
-		}
-
-		public void showEmployee(){
-
-			String name, id, message;
-			Employee objEmployee = null;
-
-			System.out.println("************************************************************************");
-			System.out.println("*                          BUSCAR UN EMPLEADO                          *");
-			System.out.println("************************************************************************");
+			break;
+			case 3:
+			System.out.println("***************************");
+			System.out.println("* Que desea cambiar?      *");
+			System.out.println("***************************");
+			System.out.println("* (1) Salario             *");
+			System.out.println("* (2) Numero de la camisa *");
+			System.out.println("* (3) Goles               *");
+			System.out.println("* (4) Calificacion        *");
+			System.out.println("***************************");
 
 			do{
-				System.out.println("Ingrese el nombre del empleado");
-				name = lector.nextLine();
+				option2 = lector.nextInt();lector.nextLine();
 
-				System.out.println("Ingrese el identificador del empleado");
-				id = lector.nextLine();
+				if(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4){
 
-				objEmployee = club.objFindEmployee(name,id);
-
-				if(objEmployee == null){
-					System.out.println("No se encuentra registrado ningun empleado con esas cualidades, ingrese otro");
+					System.out.println("Opcion invalida, digitela de nuevo");
 				}
-			}while(objEmployee == null);
+			}while(option2 != 1 && option2 != 2 && option2 != 3 && option2 != 4);
 
-			message = club.showEmployee(name,id);
+			switch(option2){
+				case 1:
+				System.out.println("Ingrese el nuevo salario del jugador");
+				salary = lector.nextDouble();
 
-			System.out.println(message);
+				message = club.changeSalary(name,id,salary);
+				System.out.println(message);
+				break;
+				case 2:
+				do{
+						System.out.println("Ingrese el nuevo numero de camiseta del jugador");
+					numTShirt = lector.nextLine();
+
+					team = club.findTeam(name,id);
+
+					findNumTShirt = club.findNumTShirt(numTShirt,team);
+
+					if(findNumTShirt){
+						System.out.println("Un jugador del equipo ya posee ese mismo numero, por favor elija otro");
+					}
+				}while(findNumTShirt);
+
+				message = club.changeNumPlayer(name,id,numTShirt);
+				System.out.println(message);
+				break;
+				case 3:
+				System.out.println("Ingrese los goles del jugador");
+				goals = lector.nextInt();lector.nextLine();
+
+				message = club.changeGoals(name,id,goals);
+				System.out.println(message);
+				break;
+				case 4:
+				do{
+
+					System.out.println("Ingrese la calificacion (entre 1 y 10)");
+					calification = lector.nextDouble();
+
+					if(calification<=1 || calification>=10){
+						System.out.println("Ingrese una opcion correcta");
+					}
+
+				}while(calification<=1 || calification>=10);
+
+				message = club.changeCalification(name,id,calification);
+				System.out.println(message);
+				break;
+			}
+			break;
 		}
 	}
+
+	public void showEmployee(){
+
+		String name, id, message;
+		Employee objEmployee = null;
+
+		System.out.println("************************************************************************");
+		System.out.println("*                          BUSCAR UN EMPLEADO                          *");
+		System.out.println("************************************************************************");
+
+		do{
+			System.out.println("Ingrese el nombre del empleado");
+			name = lector.nextLine();
+
+			System.out.println("Ingrese el identificador del empleado");
+			id = lector.nextLine();
+
+			objEmployee = club.objFindEmployee(name,id);
+			if(objEmployee == null){
+				System.out.println("No se encuentra registrado ningun empleado con esas cualidades, ingrese otro");
+			}
+		}while(objEmployee == null);
+
+		message = club.showEmployee(name,id);
+
+		System.out.println(message);
+	}
+}

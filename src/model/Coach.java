@@ -12,6 +12,15 @@ public abstract class Coach extends Employee{
 		this.yearsExperience = yearsExperience;
 	}
 
+	public String changeYearsExperience(int yearsExperience){
+
+		String message = "Se cambiaron exitosmente los años de experiencia";
+
+		setYearsExperience(yearsExperience);
+
+		return message;
+	}
+
 	public int getYearsExperience(){
 		return yearsExperience;
 	}

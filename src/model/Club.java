@@ -66,6 +66,23 @@ public class Club{
 		return verific;
 	}
 
+	public int findTeam(String name, String id){
+
+		int i = 0;
+
+		boolean verific = team1.findEmployee(name,id);
+		boolean verific2 = team2.findEmployee(name,id);
+
+		if(verific){
+			i = 1;
+		}
+		else if(verific2){
+			i = 2;
+		}
+
+		return i;
+	}
+
 	public String hireEmployee(String name,String id,double salary,int yearsExperience,int team,int teams, ArrayList<String> nameChampions){
 
 		String message = "";
@@ -196,7 +213,41 @@ public class Club{
 		}
 		else if(objEmployee != null && objEmployee instanceof Player){
 
-			message = ((Player)objEmployee).changeYearsExperience(yearsExperience);
+			message = "El empleado es un jugador y no puede cambiar los años de experiencia";
+		}	
+
+		return message;
+	}
+
+	public String changeTeams(String name, String id, int  numTemas){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeTeams(numTemas);
+		}
+		else{
+			message = "El empleado tiene que ser un entrenador principal para cambiar este campo";
+		}
+
+		return message;
+	}
+
+	public String changeChampions(String name, String id, String champions){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeChampions(champions);
+		}
+		else{
+			message = "El empleado tiene que ser entrenador principal para cambiar este campo";
 		}
 
 		return message;
@@ -208,17 +259,12 @@ public class Club{
 
 		Employee objEmployee = objFindEmployee(name,id);
 
-		if(objEmployee != null && objEmployee instanceof HeadCoach){
+		if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
 
-			message = ((HeadCoach)objEmployee).changeExpertise(yearsExperience);
+			message = ((TechnicalAssistant)objEmployee).changeExpertise(expertise);
 		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
-
-			message = ((TechnicalAssistant)objEmployee).changeExpertise(yearsExperience);
-		}
-		else if(objEmployee != null && objEmployee instanceof Player){
-
-			message = ((Player)objEmployee).changeExpertise(yearsExperience);
+		else{
+			message = "El empleado tiene que ser entrenador asistente para cambiar este campo";
 		}
 
 		return message;
@@ -230,17 +276,12 @@ public class Club{
 
 		Employee objEmployee = objFindEmployee(name,id);
 
-		if(objEmployee != null && objEmployee instanceof HeadCoach){
+		if(objEmployee != null && objEmployee instanceof Player){
 
-			message = ((HeadCoach)objEmployee).changeNumPlayer(yearsExperience);
+			message = ((Player)objEmployee).changeNumPlayer(numPlayer);
 		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
-
-			message = ((TechnicalAssistant)objEmployee).changeNumPlayer(yearsExperience);
-		}
-		else if(objEmployee != null && objEmployee instanceof Player){
-
-			message = ((Player)objEmployee).changeNumPlayer(yearsExperience);
+		else {
+			message = "El empleado tiene que ser un jugador para cambiar este campo";
 		}
 
 		return message;
@@ -252,18 +293,15 @@ public class Club{
 
 		Employee objEmployee = objFindEmployee(name,id);
 
-		if(objEmployee != null && objEmployee instanceof HeadCoach){
+		if(objEmployee != null && objEmployee instanceof Player){
 
-			message = ((HeadCoach)objEmployee).changeGoals(yearsExperience);
+			message = ((Player)objEmployee).changeGoals(goals);
 		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+		else {
+			message = "El empleado tienen que ser un jugador para cambiar este campo";
+		}
 
-			message = ((TechnicalAssistant)objEmployee).changeGoals(yearsExperience);
-		}
-		else if(objEmployee != null && objEmployee instanceof Player){
-
-			message = ((Player)objEmployee).changeGoals(yearsExperience);
-		}
+		return message;
 	}
 
 	public String changeCalification(String name, String id, double calification){
@@ -272,18 +310,14 @@ public class Club{
 
 		Employee objEmployee = objFindEmployee(name,id);
 
-		if(objEmployee != null && objEmployee instanceof HeadCoach){
+		if(objEmployee != null && objEmployee instanceof Player){
 
-			message = ((HeadCoach)objEmployee).changeCalification(yearsExperience);
+			message = ((Player)objEmployee).changeCalification(calification);
 		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
-
-			message = ((TechnicalAssistant)objEmployee).changeCalification(yearsExperience);
+		else {
+			message = "El empleado tiene que ser un jugador para cambiar este campo";
 		}
-		else if(objEmployee != null && objEmployee instanceof Player){
-
-			message = ((Player)objEmployee).changeCalification(yearsExperience);
-		}
+		return message;
 	}
 
 	public String getName(){

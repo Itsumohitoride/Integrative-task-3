@@ -15,6 +15,24 @@ public class HeadCoach extends Coach{
 		this.nameChampions = nameChampions;
 	}
 
+	public String changeTeams(int numTeams){
+
+		String message = "Se agrego correctamente el numero de equipos a cargo del entrenador";
+
+		setNumTeams(numTeams);
+
+		return message;
+	}
+
+	public String changeChampions(String champions){
+
+		String message = "Se agrego correctamente el campeonato logrado por el entrenador";
+
+		nameChampions.add(champions);
+
+		return message;
+	}
+
 	public int getNumTeams(){
 		return numTeams;
 	}
