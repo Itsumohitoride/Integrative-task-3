@@ -21,36 +21,105 @@ public abstract class Employee{
 		setState(State.INACTIVE);
 	}
 
-	/**
+	public String changeSalary(double salary){
 
-	public String changeInformationEmployee(){
+		String message = "Se cambio exitosamente el salario";
+
+		setSalary(salary);
+
+		return message;
+	}
+
+	public String changeYearsExperience(int yearsExperience){
+
+		String message = "Se cambiaron exitosmente los años de experiencia";
+
+		setYearsExperience(yearsExperience);
+
+		return message;
+	}
+
+	public String changeExpertise(int expertise){
 
 		String message = "";
+		boolean verific = false;
+		boolean verificExpertise = false;
 
-		if(objEmployee != null && objEmployee instanceof HeadCoach && option == 1){
-			if(option2 == 1){
+		Expertise[] listExpertise = new Expertise[SIX];
+		Expertise objExpertise;
 
-			}
-			else if(option2 == 2){
+		switch(expertise){
+			case 1:
+			objExpertise = Expertise.OFFENSIVE;
+			break;
+			case 2:
+			objExpertise = Expertise.DEFENSIVE;
+			break;
+			case 3:
+			objExpertise = Expertise.POSSESION;
+			break;
+			case 4:
+			objExpertise = Expertise.LABORATORYPLAYS;
+			break;
+			case 5:
+			objExpertise = Expertise.PHYSICAL_TRAINER;
+			break;
+			case 6:
+			objExpertise = Expertise.MEDICAL_ASSISTANT;
+			break;
+		}
 
-			}
-			else if(option2 == 3){
-
-			}
-			else if(option2 == 4){
-
+		for(int i = o; i<SIX; i++){
+			if(getExpertise()[i] != null){
+				listExpertise[i] = getExpertise()[i];
 			}
 		}
-		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant && option == 2){
 
-		}
-		else if(objEmployee != null && objEmployee instanceof Player && option == 3){
-
+		for (int k = 0;k<SIX && !verific; k++) {
+			if(objExpertise == listExpertise[i]){
+				verific = true;
+				message = "No se agrego la experticie porque ya la tiene el entrenador asistente";
+			}
+			else{
+				for(int p = 0;p<SIX && !verificExpertise; p++){
+					if(listExpertise[i] == null){
+						verificExpertise = true;
+						listExpertise[i] = objExpertise;
+						message = "Se agrego correctamente la experticie";
+					}
+				}
+			}
 		}
 
 		return message;
 	}
-	*/
+
+	public String changeNumPlayer(String numPlayer){
+
+		String message = "Se cambio exitosamente el numero de camiseta";
+
+		setTshirtNumber(numPlayer);
+
+		return message;
+	}
+
+	public String changeGoals(int goals){
+
+		String message = "Se cambio exitosamente el numero de goles";
+
+		setGoals(goals);
+
+		return message;
+	}
+
+	public String changeCalification(double califiction){
+
+		String message = "Se cambio exitosamente la calificacion";
+
+		setCalification(calificacion);
+
+		return message;
+	}
 
 	public String getName(){
 		return name;

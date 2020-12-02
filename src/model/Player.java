@@ -62,6 +62,14 @@ public class Player extends Employee{
 		this.goals = goals;
 	}
 
+	public Position getPosition(){
+		return position;
+	}
+
+	public void setPosition(Position position){
+		this.position = position;
+	}
+
 	@Override
 
 	public String toString(){

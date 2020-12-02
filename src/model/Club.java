@@ -157,18 +157,134 @@ public class Club{
 		}
 		return message;
 	}
-/**
-	public String changeInformationEmployee(String name, String id, int option, int option2){
+
+	public String changeSalary(String name, String id, double salary){
 
 		String message = "";
 
-		Employee objEmployee = findEmployee(name,id);
+		Employee objEmployee = objFindEmployee(name,id);
 
-		objEmployee.changeInformationEmployee(option,option2);
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeSalary(salary);
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).changeSalary(salary);
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).changeSalary(salary);
+		}
 
 		return message;
 	}
-	*/
+
+	public String changeYearsExperience(String name, String id, int yearsExperience){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeYearsExperience(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).changeYearsExperience(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).changeYearsExperience(yearsExperience);
+		}
+
+		return message;
+	}
+
+	public String changeExpertise(String name, String id, int expertise){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeExpertise(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).changeExpertise(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).changeExpertise(yearsExperience);
+		}
+
+		return message;
+	}
+
+	public String changeNumPlayer(String name, String id, String numPlayer){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeNumPlayer(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).changeNumPlayer(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).changeNumPlayer(yearsExperience);
+		}
+
+		return message;
+	}
+
+	public String changeGoals(String name, String id, int goals){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeGoals(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).changeGoals(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).changeGoals(yearsExperience);
+		}
+	}
+
+	public String changeCalification(String name, String id, double calification){
+
+		String message = "";
+
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+
+			message = ((HeadCoach)objEmployee).changeCalification(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+
+			message = ((TechnicalAssistant)objEmployee).changeCalification(yearsExperience);
+		}
+		else if(objEmployee != null && objEmployee instanceof Player){
+
+			message = ((Player)objEmployee).changeCalification(yearsExperience);
+		}
+	}
 
 	public String getName(){
 		return name;
