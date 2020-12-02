@@ -8,6 +8,7 @@ public class Main{
 
 	private Club club;
 	public final static String YES = "si";
+	public final static int SIX = 6;
 
 	//Global variable
 
@@ -71,7 +72,7 @@ public class Main{
 			dismissingEmployee();
 			break;
 			case 3:
-			changeInformationEmployee();
+			//changeInformationEmployee();
 			break;
 			case 4:
 			showEmployee();
@@ -125,20 +126,23 @@ public class Main{
 
 	public void hireEmployee(){
 
-		String name, id, playerProfessional, message, champions, verific, nomExpertise, numTShirt;
+		String name, id, playerProfessional, message, champions, numTShirt, optionToContinue;
 		int typeEmployee = 0;
 		double salary = 0;
 		int yearsExperience = 0;
-		int i = 0;
 		int team = 0;
 		int teams = 0;
 		int option = 0;
 		int playerPosition = 0;
+		int typeExpertise = 0;
+		int calification = 0;
+		int i = 0;
 		boolean player = false;
 		boolean findEmployee = false;
 		boolean findNumTShirt = false;
+		boolean verific = false;
 		ArrayList<String> nameChampions = new ArrayList<>();
-		ArrayList<String> expertise = new ArrayList<>();
+		int[] expertise = new int[SIX];
 
 		System.out.println("***********************************************************************");
 		System.out.println("*                        CONTRATAR UN EMPLEADO                        *");
@@ -211,12 +215,12 @@ public class Main{
 				nameChampions.add(champions);
 
 				System.out.println("Desea ingresas otro campeonato conseguido? (Si/No)");
-				verific = lector.nextLine();
+				optionToContinue = lector.nextLine();
 
-				if(verific.equalsIgnoreCase(YES)){
+				if(optionToContinue.equalsIgnoreCase(YES)){
 					i++;
 				}
-			}while(verific.equalsIgnoreCase(YES));
+			}while(optionToContinue.equalsIgnoreCase(YES));
 
 			message = club.hireEmployee(name,id,salary,yearsExperience,team,teams,nameChampions);
 
@@ -246,18 +250,47 @@ public class Main{
 
 			do{
 
-				System.out.println("Ingrese el experticio #"+(i+1)+" del asistente tecnico");
-				nomExpertise = lector.nextLine();
+				System.out.println("Ingrese el numero de experticies (entre 1 y 6)");
+				calification = lector.nextInt();
 
-				expertise.add(nomExpertise);
-
-				System.out.println("Desea ingresas otra experticia? (Si/No)");
-				verific = lector.nextLine();
-
-				if(verific.equalsIgnoreCase(YES)){
-					i++;
+				if(calification<0 || calification>5){
+					System.out.println("Ingrese una opcion correcta");
 				}
-			}while(verific.equalsIgnoreCase(YES));
+
+			}while(calification<0 || calification>5);
+
+			System.out.println("****************************");
+			System.out.println("* Que experticie tiene?    *");
+			System.out.println("****************************");
+			System.out.println("* (1) Ofensivo             *");
+			System.out.println("* (2) Defensivo            *");
+			System.out.println("* (3) Posesion             *");
+			System.out.println("* (4) Jugadas de lab.      *");
+			System.out.println("* (5) Fisico               *");
+			System.out.println("* (6) Asistente medico     *");
+			System.out.println("****************************");
+
+			for(int p = 0; p<calification; p++){
+
+				typeExpertise = lector.nextInt();
+
+				do{
+
+					for(int k = 0;k<calification && !verific; k++){
+						if(typeExpertise == expertise[k]){
+							verific = true;
+						}
+					}
+
+					if(verific){
+						System.out.println("Ingrese una experticie diferente de las ya registradas");
+					}
+					else if(!verific){
+						expertise[p] = typeExpertise;
+					}
+
+				}while(verific);
+			}
 
 			message = club.hireEmployee(name,id,salary,yearsExperience,team,player,expertise);
 
@@ -502,6 +535,7 @@ public class Main{
 	public void showEmployee(){
 
 		String name, id, message;
+		Employee objEmployee = null;
 
 		System.out.println("************************************************************************");
 		System.out.println("*                          BUSCAR UN EMPLEADO                          *");
@@ -514,12 +548,12 @@ public class Main{
 			System.out.println("Ingrese el identificador del empleado");
 			id = lector.nextLine();
 
-			findEmployee = club.findEmployee(name,id);
+			objEmployee = club.objFindEmployee(name,id);
 
-			if(!findEmployee){
+			if(objEmployee == null){
 				System.out.println("No se encuentra registrado ningun empleado con esas cualidades, ingrese otro");
 			}
-		}while(!findEmployee);
+		}while(objEmployee == null);
 
 		message = club.showEmployee(name,id);
 

@@ -36,15 +36,18 @@ public class HeadCoach extends Coach{
 	public String toString(){
 
 		String message = "";
-		String messageChampions;
+		String messageChampions = "";
 
 		for(int i = 0; i<nameChampions.size(); i++){
-
+			if (nameChampions.get(i) != null){
+				messageChampions += nameChampions.get(i)+",";
+			}
 		}
 
 		message = super.toString()+
 				  "\n** Equipos a cargo: "+numTeams+
-				  "\n** Campeonatos conseguidos: "
+				  "\n** Campeonatos conseguidos: "+messageChampions+
+				  "\n************************************************************************";
 
 		return message;
 	}

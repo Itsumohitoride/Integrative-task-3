@@ -88,12 +88,12 @@ public abstract class Employee{
 
 		String message = "";
 
-		message = "*******************************\n"+
-				  "*         Informacion         *\n"+
-				  "*******************************\n"+
+		message = "************************************************************************\n"+
+				  "*                              Informacion                             *\n"+
+				  "************************************************************************\n"+
 				  "** Nombre: "+name+
 				  "\n** Identificador: "+id+
-				  "\n** Salario: "+salary+
+				  "\n** Salario: "+(int)salary+
 				  "\n** Estado: "+state;
 		return message;
 	}

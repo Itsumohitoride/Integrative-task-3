@@ -54,7 +54,7 @@ public class Team{
 		String message = "";
 		boolean verific = false;
 
-		if(objEmployee != null && objEmployee instanceof Player){
+		if(objEmployee != null){
 			for(int i = 0; i<TWENTYFIVE && !verific; i++){
 				if(players[i] == null){
 					verific = true;
@@ -74,7 +74,7 @@ public class Team{
 		String message = "";
 		boolean verific = false;
 
-		if(objEmployee != null && objEmployee instanceof HeadCoach){
+		if(objEmployee != null){
 			for (int i = 0;i<ONE && !verific; i++) {
 				if(headCoach[i] == null){
 					verific = true;
@@ -95,7 +95,7 @@ public class Team{
 		String message = "";
 		boolean verific = false;
 
-		if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+		if(objEmployee != null){
 			for(int i = 0; i<THREE && !verific; i++){
 				if(technicalAssistant[i] == null){
 					verific = true;

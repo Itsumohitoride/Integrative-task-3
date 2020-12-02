@@ -70,8 +70,8 @@ public class Player extends Employee{
 
 		message = super.toString()+
 				  "\n** Numero de camisa: "+tshirtNumber+
-				  "\n** Posicio: "+position+
-				  "\n*******************************";
+				  "\n** Posicion: "+position+
+				  "\n************************************************************************";
 
 		return message;
 	}

@@ -10,6 +10,7 @@ public class Club{
 	private String date;
 	private Team team1;
 	private Team team2;
+	public final static int SIX = 6;
 
 	//Relation
 
@@ -29,7 +30,12 @@ public class Club{
 
 		boolean verific = false;
 
-		verific = findEmployee(name,id);
+		verific = team1.findEmployee(name,id);
+
+		if(!verific){
+
+			verific = team2.dismissingEmployee(name,id);
+		}
 
 		return verific;
 	}
@@ -37,9 +43,10 @@ public class Club{
 	public Employee objFindEmployee(String name, String id){
 
 		Employee objEmployee = null;
+		boolean verific = false;
 
 		for(int i = 0; i<employee.size() && !verific; i++){
-			if(employee.get(i) != null && employee.get(i).getName().equalsIgnoreCase(name) && employee.get(i).getId(i).equalsIgnoreCase(id)){
+			if(employee.get(i) != null && employee.get(i).getName().equalsIgnoreCase(name) && employee.get(i).getId().equalsIgnoreCase(id)){
 				verific = true;
 				objEmployee = employee.get(i);
 			}
@@ -64,6 +71,7 @@ public class Club{
 		String message = "";
 
 		HeadCoach objEmployee = new HeadCoach(name,id,salary,yearsExperience,teams,nameChampions);
+		employee.add(objEmployee);
 
 		if(team == 1){
 			message = team1.hireEmployee(objEmployee);
@@ -75,11 +83,34 @@ public class Club{
 		return message;
 	}
 
-	public String hireEmployee(String name,String id,double salary, int yearsExperience, int team, boolean professionalPlayer, ArrayList<String> expertise){
+	public String hireEmployee(String name,String id,double salary, int yearsExperience, int team, boolean professionalPlayer, int[] expertise){
 
 		String message = "";
+		Expertise[] objExpertise = new Expertise[SIX];
 
-		TechnicalAssistant objEmployee = new TechnicalAssistant(name,id,salary,yearsExperience,professionalPlayer);
+		for(int k = 0; k<expertise.length; k++){
+			if(expertise[k] == 1){
+				objExpertise[k] = Expertise.OFFENSIVE;
+			}
+			else if(expertise[k] == 2){
+				objExpertise[k] = Expertise.DEFENSIVE;
+			}
+			else if(expertise[k] == 3){
+				objExpertise[k] = Expertise.POSSESION;
+			}
+			else if(expertise[k] == 4){
+				objExpertise[k] = Expertise.LABORATORYPLAYS;
+			}
+			else if(expertise[k] == 5){
+				objExpertise[k] = Expertise.PHYSICAL_TRAINER;
+			}
+			else if(expertise[k] == 6){
+				objExpertise[k] = Expertise.MEDICAL_ASSISTANT;
+			}
+		}
+
+		TechnicalAssistant objEmployee = new TechnicalAssistant(name,id,salary,yearsExperience,professionalPlayer,objExpertise);
+		employee.add(objEmployee);
 
 		if(team == 1){
 			message = team1.hireEmployee(objEmployee);
@@ -96,6 +127,7 @@ public class Club{
 		String message = "";
 
 		Player objEmployee = new Player(name,id,salary,numTShirt,playerPosition);
+		employee.add(objEmployee);
 
 		if(team == 1){
 			message = team1.hireEmployee(objEmployee);
@@ -171,7 +203,7 @@ public class Club{
 				  "*****************************\n"+
 				  "* (1) "+team1.getName()+"\n"+
 				  "* (2) "+team2.getName()+"\n"+
-				  "*****************************\n";
+				  "*****************************";
 
 		return message;
 	}
