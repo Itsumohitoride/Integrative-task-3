@@ -11,14 +11,17 @@ public class Club{
 	private Team team1;
 	private Team team2;
 	public final static int SIX = 6;
+	public final static int SEVEN = 7;
 
 	//Relation
 
 	private ArrayList<Employee> employee;
+	private Coach[][] office;
 
 	public Club(String name, String nit, String date, String teamA, String teamB){
 
 		employee = new ArrayList<>();
+		office = new Coach[SIX][SIX];
 		team1 = new Team(teamA);
 		team2 = new Team(teamB);
 		this.name = name;
@@ -86,6 +89,7 @@ public class Club{
 	public String hireEmployee(String name,String id,double salary,int yearsExperience,int team,int teams, ArrayList<String> nameChampions){
 
 		String message = "";
+		boolean verific = false;
 
 		HeadCoach objEmployee = new HeadCoach(name,id,salary,yearsExperience,teams,nameChampions);
 		employee.add(objEmployee);
@@ -97,12 +101,25 @@ public class Club{
 			message = team2.hireEmployee(objEmployee);
 		}
 
+		for(int i=0;i<SIX && !verific;i++){
+
+            if(i%2 == 0){
+                for(int j=0;j<SIX && !verific;j+=2){
+	                if(office[i][j] == null){   
+	                    office[i][j] = objEmployee;
+	                    verific = true;
+	                }
+                }
+            }   
+        }
 		return message;
 	}
 
 	public String hireEmployee(String name,String id,double salary, int yearsExperience, int team, boolean professionalPlayer, int[] expertise){
 
 		String message = "";
+		boolean verific = false;
+
 		Expertise[] objExpertise = new Expertise[SIX];
 
 		for(int k = 0; k<expertise.length; k++){
@@ -136,6 +153,18 @@ public class Club{
 			message = team2.hireEmployee(objEmployee);
 		}
 
+		for(int i=0;i<SIX && !verific;i++){
+
+            if(i%2 == 0){
+                for(int j=0;j<SIX && !verific;j+=2){
+                    if(office[i][j] == null){   
+	                    office[i][j] = objEmployee;
+	                    verific = true;
+	                }
+                }
+            }   
+        }
+
 		return message;
 	}
 
@@ -161,6 +190,32 @@ public class Club{
 		String message = "Se despidio correctamente al empleado";
 		boolean verific = false;
 
+		Employee objEmployee = objFindEmployee(name,id);
+
+		if(objEmployee != null && objEmployee instanceof HeadCoach){
+			for(int i=0;i<SIX;i++){
+
+            	if(i%2 == 0){
+                	for(int j=0;j<SIX;j+=2){
+                    	if(office[i][j] == ((HeadCoach)objEmployee)){
+                    		office[i][j] = null;
+                    	}
+                	}
+            	}
+            } 
+        }
+        else if(objEmployee != null && objEmployee instanceof TechnicalAssistant){
+			for(int i=0;i<SIX;i++){
+
+            	if(i%2 == 0){
+                	for(int j=0;j<SIX;j+=2){
+                    	if(office[i][j] == ((TechnicalAssistant)objEmployee)){
+                    		office[i][j] = null;
+                   	 	}
+                	}
+            	} 
+            }  
+        }
 
 		verific = team1.dismissingEmployee(name,id);
 
@@ -213,7 +268,7 @@ public class Club{
 		}
 		else if(objEmployee != null && objEmployee instanceof Player){
 
-			message = "El empleado es un jugador y no puede cambiar los años de experiencia";
+			message = "El empleado tiene que ser un entrenado principal o asistente para cambiar este campo";
 		}	
 
 		return message;
@@ -380,4 +435,38 @@ public class Club{
 		return message;
 	}
 
+	public String showEdifice(){
+
+		String message = "";
+
+		message += "************************************************************************\n"+
+				   "*                               OFICINAS                               *\n"+
+				   "************************************************************************\n";
+
+		for(int i=0;i<SIX;i++){
+			for(int j=0;j<SIX;j++){
+				if(office[i][j] == null){
+					message += "[Vacio]";
+				}
+				else if(office[i][j] != null){
+					message += "["+office[i][j].getName()+"]";	
+				}
+			}
+			message +="\n";
+		}
+
+		message += "************************************************************************\n"+
+				   "*                               CAMERINOS                              *\n"+
+				   "************************************************************************\n";
+
+		message += "Equipo: "+team1.getName()+"\n";
+
+		message += team1.showDressing(SEVEN,SEVEN)+"\n";
+
+		message += "Equipo: "+team2.getName()+"\n";
+
+		message += team1.showDressing(SIX,SEVEN);
+
+		return message;
+	}
 }

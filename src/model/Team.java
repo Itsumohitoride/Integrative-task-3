@@ -1,4 +1,5 @@
 package model;
+import  java.util.*;
 
 public class Team{
 
@@ -15,6 +16,7 @@ public class Team{
 	private HeadCoach[] headCoach;
 	private TechnicalAssistant[] technicalAssistant;
 	private Player[] players;
+	private Player[][] dressing;
 
 	public Team(String name){
 
@@ -150,6 +152,58 @@ public class Team{
 			}
 		}
 		return verific;
+	}
+
+	public String showDressing(int one, int two){
+
+		String message = "";
+
+		dressing =  new Player[one][two];
+
+		List<Player> playerList = Arrays.asList(players);
+
+		Collections.shuffle(playerList);
+
+		playerList.toArray(players);
+
+		for(int i = 0;i<one;i++){
+
+            if(i%2 == 0){
+                for(int j = 0;j<two;j+=2){
+                    if(dressing[i][j] == null && j == 0){	
+                    	dressing[i][j] = players[j];
+                    }
+                    else if(dressing[i][j] == null){
+                    	dressing[i][j] = players[j-2];
+                    }
+                }
+            }
+            else{
+				for(int j=two-1;j>=0;j-=2){
+					if(dressing[i][j] == null && j == two-1){
+						dressing[i][j] = players[j];
+					}
+					else if(dressing[i][j] == null){
+                    	dressing[i][j] = players[j+2];
+                    }
+				}
+			} 
+        }
+
+        for(int i = 0;i<one;i++){
+			for(int j = 0;j<two;j++){
+				
+				if(dressing[i][j] == null){
+					message += "[Vacio]";
+				}
+				else if(dressing[i][j] != null){
+					message += "["+dressing[i][j].getName()+"]";	
+				}
+			}
+			message += "\n";
+		}
+
+		return message;
 	}
 
 	public String getName(){

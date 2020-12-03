@@ -55,6 +55,7 @@ public class Main{
 		System.out.println("* (2) Despedir un empleado                  *");
 		System.out.println("* (3) Actualizar informacion de un empleado *");
 		System.out.println("* (4) Buscar un empleado                    *");
+		System.out.println("* (5) Mostrar los edificios                 *");
 		System.out.println("* (0) Salir                                 *");
 		System.out.println("*********************************************");
 		option = lector.nextInt();lector.nextLine();
@@ -78,7 +79,7 @@ public class Main{
 			showEmployee();
 			break;
 			case 5:
-			
+			showEdifice();
 			break;
 			case 6:
 			
@@ -126,7 +127,7 @@ public class Main{
 
 	public void hireEmployee(){
 
-		String name, id, playerProfessional, message, champions, numTShirt, optionToContinue;
+		String name, id, playerProfessional, message, champions, numTShirt, optionToContinue, election;
 		int typeEmployee = 0;
 		double salary = 0;
 		int yearsExperience = 0;
@@ -167,7 +168,7 @@ public class Main{
 		}while(typeEmployee != 1 && typeEmployee != 2 && typeEmployee != 3);
 
 		do{
-			System.out.println("Ingrese el nombre del empleado");
+			System.out.println("Ingrese el nombre completo del empleado");
 			name = lector.nextLine();
 
 			System.out.println("Ingrese el numero identificador del empleado");
@@ -207,20 +208,25 @@ public class Main{
 			System.out.println("Cuantos equipos tiene acargo el entrenador?");
 			teams = lector.nextInt();lector.nextLine();
 
-			do{
+			System.out.println("El entrenador tiene campeonatos conseguidos? (si/no)");
+			election = lector.nextLine();
 
-				System.out.println("Ingrese el nombre del campeonato #"+(i+1)+" conseguido por el entrenador");
-				champions = lector.nextLine();
+			if(election.equalsIgnoreCase(YES)){
+				do{
 
-				nameChampions.add(champions);
+					System.out.println("Ingrese el nombre del campeonato #"+(i+1)+" conseguido por el entrenador");
+					champions = lector.nextLine();
 
-				System.out.println("Desea ingresas otro campeonato conseguido? (Si/No)");
-				optionToContinue = lector.nextLine();
+					nameChampions.add(champions);
 
-				if(optionToContinue.equalsIgnoreCase(YES)){
-					i++;
-				}
-			}while(optionToContinue.equalsIgnoreCase(YES));
+					System.out.println("Desea ingresas otro campeonato conseguido? (Si/No)");
+					optionToContinue = lector.nextLine();
+
+					if(optionToContinue.equalsIgnoreCase(YES)){
+						i++;
+					}
+				}while(optionToContinue.equalsIgnoreCase(YES));
+			}
 
 			message = club.hireEmployee(name,id,salary,yearsExperience,team,teams,nameChampions);
 
@@ -345,7 +351,7 @@ public class Main{
 		System.out.println("************************************************************************");
 
 		do{
-			System.out.println("Ingrese el nombre del empleado");
+			System.out.println("Ingrese el nombre completo del empleado");
 			name = lector.nextLine();
 
 			System.out.println("Ingrese el identificador del empleado");
@@ -376,11 +382,11 @@ public class Main{
 		int typeExpertise = 0;
 		double salary = 0;
 		double calification = 0;
-		boolean findEmployee;
-		boolean findNumTShirt;
+		boolean findEmployee = false;
+		boolean findNumTShirt = false;
 
 		do{
-			System.out.println("Ingrese el nombre del empleado");
+			System.out.println("Ingrese el nombre completo del empleado");
 			name = lector.nextLine();
 
 			System.out.println("Ingrese el identificador del empleado");
@@ -579,11 +585,11 @@ public class Main{
 					System.out.println("Ingrese la calificacion (entre 1 y 10)");
 					calification = lector.nextDouble();
 
-					if(calification<=1 || calification>=10){
+					if(calification>=1 || calification<=10){
 						System.out.println("Ingrese una opcion correcta");
 					}
 
-				}while(calification<=1 || calification>=10);
+				}while(calification>=1 || calification<=10);
 
 				message = club.changeCalification(name,id,calification);
 				System.out.println(message);
@@ -603,7 +609,7 @@ public class Main{
 		System.out.println("************************************************************************");
 
 		do{
-			System.out.println("Ingrese el nombre del empleado");
+			System.out.println("Ingrese el nombre completo del empleado");
 			name = lector.nextLine();
 
 			System.out.println("Ingrese el identificador del empleado");
@@ -616,6 +622,19 @@ public class Main{
 		}while(objEmployee == null);
 
 		message = club.showEmployee(name,id);
+
+		System.out.println(message);
+	}
+
+	public void showEdifice(){
+
+		String message;
+
+		System.out.println("************************************************************************");
+		System.out.println("*                               EDIFICIOS                              *");
+		System.out.println("************************************************************************");
+
+		message = club.showEdifice();
 
 		System.out.println(message);
 	}

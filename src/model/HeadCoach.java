@@ -1,7 +1,7 @@
 package model;
 import java.util.*;
 
-public class HeadCoach extends Coach{
+public class HeadCoach extends Coach implements Level,Price{
 
 	//Attribute
 
@@ -49,12 +49,33 @@ public class HeadCoach extends Coach{
 		this.nameChampions = nameChampions;
 	}
 
+	public double calculateLevel(){
+
+		double level = 0;
+
+		level = 5+(nameChampions.size()/10)
+
+		return level; 
+	}
+
+	public double calculatePrice(){
+
+		double price = 0;
+
+		price = (salary*10)+(yearsExperience*100)+(nameChampions.size()*50);
+
+		return price;
+	}
+
 	@Override 
 
 	public String toString(){
 
 		String message = "";
 		String messageChampions = "";
+
+		double level = calculateLevel();
+		double price = calculatePrice();
 
 		for(int i = 0; i<nameChampions.size(); i++){
 			if (nameChampions.get(i) != null){
@@ -65,6 +86,8 @@ public class HeadCoach extends Coach{
 		message = super.toString()+
 				  "\n** Equipos a cargo: "+numTeams+
 				  "\n** Campeonatos conseguidos: "+messageChampions+
+				  "\n** Precio en el mercado: "+price+
+				  "\n** Nivel del jugador: "+level+
 				  "\n************************************************************************";
 
 		return message;
