@@ -56,6 +56,11 @@ public class Main{
 		System.out.println("* (3) Actualizar informacion de un empleado *");
 		System.out.println("* (4) Buscar un empleado                    *");
 		System.out.println("* (5) Mostrar los edificios                 *");
+		System.out.println("* (6) Agregar una formacion                 *");
+		System.out.println("* (7) Mostrar un equipo                     *");
+		System.out.println("* (8) Mostrar los equipos                   *");
+		System.out.println("* (9) Cambiar informacion de equipo         *");
+		System.out.println("* (10) Mostrar informacion del club         *");
 		System.out.println("* (0) Salir                                 *");
 		System.out.println("*********************************************");
 		option = lector.nextInt();lector.nextLine();
@@ -82,13 +87,19 @@ public class Main{
 			showEdifice();
 			break;
 			case 6:
-			
+			addFormation();
 			break;
 			case 7:
-			
+			showTeam();
 			break;
 			case 8:
-
+			showTeams();
+			break;
+			case 9:
+			changeTeam();
+			break;
+			case 10:
+			showClub();
 			break;
 			default:
 			System.out.println("**********************************************************************");
@@ -98,6 +109,12 @@ public class Main{
 		}
 		return option;
 	}
+
+	/**
+	*<b>name:</b> createClub <br>
+	* inicializate the name, date of creation and the names of the teams, and crate an object club. <br>
+	* <b>post:</b> the object club is create, with two teams. <br>
+	*/
 
 	public void createClub(){
 
@@ -113,7 +130,7 @@ public class Main{
 		System.out.println("Ingrese el NIT del club");
 		nit = lector.nextLine();
 
-		System.out.println("Ingrese la fecha de fundacion del club");
+		System.out.println("Ingrese la fecha de fundacion del club (DD/MM/ANIO)");
 		date = lector.nextLine();
 
 		System.out.println("Ingrese el nombre del primer equipo");
@@ -124,6 +141,12 @@ public class Main{
 
 		club = new Club(name,nit,date,team1,team2);
 	}
+
+	/**
+	* <b>name:</b> hireEmployee <br>
+	* Hire an employee and put then in a team. <br>
+	* <b>post:</b> save the employee in the team. <br>
+	*/
 
 	public void hireEmployee(){
 
@@ -265,21 +288,24 @@ public class Main{
 
 			}while(calification<0 || calification>=6);
 
-			System.out.println("****************************");
-			System.out.println("* Que experticie tiene?    *");
-			System.out.println("****************************");
-			System.out.println("* (1) Ofensivo             *");
-			System.out.println("* (2) Defensivo            *");
-			System.out.println("* (3) Posesion             *");
-			System.out.println("* (4) Jugadas de lab.      *");
-			System.out.println("* (5) Fisico               *");
-			System.out.println("* (6) Asistente medico     *");
-			System.out.println("****************************");
+			
 
 			for(int p = 0; p<calification; p++){
 
 				do{	
 					do{
+
+						System.out.println("****************************");
+						System.out.println("* Que experticie tiene?    *");
+						System.out.println("****************************");
+						System.out.println("* (1) Ofensivo             *");
+						System.out.println("* (2) Defensivo            *");
+						System.out.println("* (3) Posesion             *");
+						System.out.println("* (4) Jugadas de lab.      *");
+						System.out.println("* (5) Fisico               *");
+						System.out.println("* (6) Asistente medico     *");
+						System.out.println("****************************");
+						
 						typeExpertise = lector.nextInt();
 
 						for(int k = 0;k<calification && !verific; k++){
@@ -341,6 +367,12 @@ public class Main{
 		}
 	}
 
+	/**
+	* <b>name:</b> dismissingEmployee <br>
+	* Dismiss an employee and change the state of then to inactive, and remove from the team.
+	* <b>post:</b> Remove the employee of the team and change her state.
+	*/
+
 	public void dismissingEmployee(){
 
 		String name, id, message;
@@ -368,6 +400,12 @@ public class Main{
 
 		System.out.println(message);
 	}
+
+	/**
+	* <b>name:</b> changeInformationEmployee <br>
+	* Change the information of an employee <br>
+	* <b>post:</b> Save the changes of the employee's information.
+	*/
 
 	public void changeInformationEmployee(){
 
@@ -599,6 +637,12 @@ public class Main{
 		}
 	}
 
+	/**
+	* <b>name:</b> showEmployee <br>
+	* Find and show the information of an employee <br>
+	* <b>post:</b> Print the information of the employee. <br>
+ 	*/
+
 	public void showEmployee(){
 
 		String name, id, message;
@@ -626,6 +670,12 @@ public class Main{
 		System.out.println(message);
 	}
 
+	/**
+	* <b>name:</b> showEdifice <br>
+	* Show the information of the dressing rooms of the players and the office's coachs. <br>
+	* <b>post:</b> Print the information of the dressing rooms of the players and the office's coachs. <br>
+	*/
+
 	public void showEdifice(){
 
 		String message;
@@ -637,5 +687,191 @@ public class Main{
 		message = club.showEdifice();
 
 		System.out.println(message);
+	}
+
+	/**
+	* <b>name:</b> showTeam <br>
+	* Find and show all the information of any team.
+	* <b>pos:</b> Show the information of the team.
+	*/
+
+	public void showTeam(){
+
+		String message;
+		int team = 0;
+
+		message = club.showNames();
+		System.out.println(message);
+
+		do{
+			team = lector.nextInt();lector.nextLine();
+
+			if(team != 1 && team != 2){
+
+				System.out.println("Opcion invalida, digitela de nuevo");
+			}
+		}while(team != 1 && team != 2);
+
+		message = club.showTeam(team);
+
+		System.out.println(message);
+	}
+
+	/**
+	* <b>name:</b> showTeams <br>
+	* Find and show all the information of the teams.
+	* <b>post:</b> Print the information of the teams.
+	*/
+
+	public void showTeams(){
+
+		String message;
+
+		message = club.showTeams();
+
+		System.out.println(message);
+	}
+
+	/**
+	* <b>name:</b> addFormation <br>
+	* Add a line up to a team.
+	* <b>post:</b> Save the line up for a team.
+ 	*/
+
+	public void addFormation(){
+
+		String message, date;
+		int forward = 0;
+		int midfielder = 0;
+		int defender = 0;
+		int team = 0;
+		int way = 0;
+
+		System.out.println("************************************************************************");
+		System.out.println("*                               FORMACION                              *");
+		System.out.println("************************************************************************");
+
+		message = club.showNames();
+		System.out.println(message);
+
+		do{
+			team = lector.nextInt();lector.nextLine();
+
+			if(team != 1 && team != 2){
+
+				System.out.println("Opcion invalida, digitela de nuevo");
+			}
+		}while(team != 1 && team != 2);
+
+		System.out.println("***************************");
+		System.out.println("* Que tipo de tactica es? *");
+		System.out.println("***************************");
+		System.out.println("* (1) Posesion            *");
+		System.out.println("* (2) Contraataque        *");
+		System.out.println("* (3) Presion alta        *");
+		System.out.println("* (4) Por defecto         *");
+		System.out.println("***************************");
+
+		do{
+			way = lector.nextInt();lector.nextLine();
+
+			if(way != 1 && way != 2  && way != 3  && way != 4){
+
+				System.out.println("Opcion invalida, digitela de nuevo");
+			}
+		}while(way != 1 && way != 2  && way != 3  && way != 4);
+
+		System.out.println("Ingrese la fecha de cuando se va a jugar con la alineacion");
+		date = lector.nextLine();
+
+		System.out.println("Ingrese cuantos delanteros tiene la formacion");
+
+		do{
+			forward = lector.nextInt();
+
+			if(forward<1){
+				System.out.println("Tiene que haber por lo menos un delantero");
+			}
+		}while(forward<1);
+
+		System.out.println("Ingrese cuantos volantes tiene la formacion");
+
+		do{
+			midfielder = lector.nextInt();
+
+			if(midfielder<1){
+				System.out.println("Tiene que haber por lo menos un volante");
+			}
+		}while(midfielder<1);
+
+		System.out.println("Ingrese cuantas defensas tiene la formacion");
+
+		do{
+			defender = lector.nextInt();
+
+			if(defender<1){
+				System.out.println("Tiene que haber por lo menos un defensa");
+			}
+		}while(defender<1);
+
+
+		message = club.addFormation(team,way,date,forward,midfielder,defender);
+
+		System.out.println(message);
+	}
+
+	/**
+	* <b>name:</b> changeTeam <br>
+	* Change the new name of any team. <br>
+	* <b>post:</b> Save the new name of any team. <br>
+	*/
+
+	public void changeTeam(){
+
+		String message, nameTeam;
+		int team = 0;
+
+		System.out.println("************************************************************************");
+		System.out.println("*                      Cambio de nombre de equipo                      *");
+		System.out.println("************************************************************************");	
+
+		message = club.showNames();
+		System.out.println(message);
+
+		do{
+			team = lector.nextInt();lector.nextLine();
+
+			if(team != 1 && team != 2){
+
+				System.out.println("Opcion invalida, digitela de nuevo");
+			}
+		}while(team != 1 && team != 2);
+
+		System.out.println("Ingrese el nuevo nombre para el equipo");
+
+		nameTeam = lector.nextLine();
+
+		message = club.changeNameTeam(nameTeam,team);
+
+		System.out.println(message);
+	}
+
+	/**
+	* <b>name:</b> showClub <br>
+	* Show all the information of the club. <br>
+	* <b>post:</b> Show all the information of the club. <br>
+	*/
+
+	public void showClub(){
+
+		System.out.println("************************************************************************");
+		System.out.println("*                         INFORMACION DEL CLUB                         *");
+		System.out.println("************************************************************************");
+
+		System.out.println("** Nombre: "+club.getName());
+		System.out.println("** Nit: "+club.getNit());
+		System.out.println("** Fecha de creacion: "+club.getDate()+"\n");
+		System.out.println(club.showTeams());
+		System.out.println(club.showEdifice());
 	}
 }
