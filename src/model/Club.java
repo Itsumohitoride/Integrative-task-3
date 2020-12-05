@@ -58,7 +58,7 @@ public class Club{
 
 		if(!verific){
 
-			verific = team2.dismissingEmployee(name,id);
+			verific = team2.findEmployee(name,id);
 		}
 
 		return verific;

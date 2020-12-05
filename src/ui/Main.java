@@ -228,7 +228,7 @@ public class Main{
 		switch(typeEmployee){
 			case 1:
 
-			System.out.println("Cuantos equipos tiene acargo el entrenador?");
+			System.out.println("Cuantos equipos ha tenido acargo el entrenador?");
 			teams = lector.nextInt();lector.nextLine();
 
 			System.out.println("El entrenador tiene campeonatos conseguidos? (si/no)");
@@ -623,11 +623,11 @@ public class Main{
 					System.out.println("Ingrese la calificacion (entre 1 y 10)");
 					calification = lector.nextDouble();
 
-					if(calification>=1 || calification<=10){
+					if(calification<1 || calification>10){
 						System.out.println("Ingrese una opcion correcta");
 					}
 
-				}while(calification>=1 || calification<=10);
+				}while(calification<1 || calification>10);
 
 				message = club.changeCalification(name,id,calification);
 				System.out.println(message);

@@ -259,8 +259,8 @@ public class Player extends Employee implements Level,Price{
 				  "\n** Posicion: "+position+
 				  "\n** Goles: "+goals+
 				  "\n** Calificacion: "+calification+
-				  "\n** Precio en el mercado: "+(int)price+
-				  "\n** Nivel del jugador: "+(int)level+
+				  "\n** Precio en el mercado: "+price+
+				  "\n** Nivel del jugador: "+level+
 				  "\n************************************************************************";
 
 		return message;

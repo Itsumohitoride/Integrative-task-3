@@ -163,8 +163,8 @@ public class HeadCoach extends Coach implements Level,Price{
 		message = super.toString()+
 				  "\n** Equipos a cargo: "+numTeams+
 				  "\n** Campeonatos conseguidos: "+messageChampions+
-				  "\n** Precio en el mercado: "+(int)price+
-				  "\n** Nivel del entrenador: "+(int)level+
+				  "\n** Precio en el mercado: "+price+
+				  "\n** Nivel del entrenador: "+level+
 				  "\n************************************************************************";
 
 		return message;
